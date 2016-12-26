@@ -1,0 +1,36 @@
+<table class="table table-striped" *ngIf="personsData.length">
+    <thead>
+    <tr>
+        <th *ngFor="let column of columns" class="center">
+            <div *ngIf="column.name !== 'deleteoption'" class="pointer" (click)="onSort(column.name)">
+                {{column.title}}
+                <div ngClass="fa {{sortField['class']}}"></div>
+            </div>
+            <div *ngIf="column.name === 'deleteoption'">
+                {{column.title}}
+            </div>
+        </th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let rows of personsData | personFilter: routeUrl | orderby: sortField['sort']">
+        <td *ngFor="let column of columns">
+            <p *ngIf="column.type === 'string'">{{rows[column.name]}}</p>
+            <div *ngIf="column.type === 'checkbox'" class="item-checkbox">
+                <input type="checkbox" (change)="onToggleClick($event)" [(ngModel)]="rows[column.name]">
+            </div>
+            <span *ngIf="column.type === 'link' && (deleteOption[personsData.indexOf(rows)] == false || deleteOption[personsData.indexOf(rows)]==undefined)"
+                  class="pointer"
+                  (click)="deleteQuestion(rows)">X</span>
+            <span *ngIf="column.type === 'link' && deleteOption[personsData.indexOf(rows)] == true" class="pointer">
+                <span (click)="onDontDelete(rows)">No</span>
+                <span>/</span>
+                <span (click)="onDelete(rows)">Yes</span>
+            </span>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<span *ngFor="let column of columns">
+    <a *ngIf="column.type === 'checkbox'" routerLink="/{{column.name}}">{{column.name}} |</a>
+</span>

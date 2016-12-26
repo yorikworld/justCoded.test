@@ -1,0 +1,19 @@
+<form>
+    <div class="form-group">
+        <h4 class="text-left">Add new person</h4>
+        <input #personInput (keyup)="onKeyUp(personInput.value)" type="text" class="form-control person-input"
+               placeholder="Name">
+        <div class="checkbox form-checkbox">
+            <label *ngFor="let role of roles">
+                <input type="checkbox"
+                       (change)="onCheckboxChange(role)"
+                       name="{{role.key}}"
+                       [checked]="formData[role.key]">
+                {{role.title}}
+            </label>
+        </div>
+        <button type="submit" class="btn btn-default pull-right" [disabled]="!formValid"
+                (click)="onSubmit(); personInput.value='';">Add
+        </button>
+    </div>
+</form>

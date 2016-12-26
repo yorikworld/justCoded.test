@@ -1,0 +1,10 @@
+<div class="text-center">
+    <h4>Sidebar</h4>
+</div>
+<div class="text-center">
+    <h4>Total persons: {{personsData.length}}</h4></div>
+<div>
+    <div *ngFor="let role of roles">
+        <span class="pointer" routerLink="/{{role.key}}">{{role.key}}: {{eachRolesCount[role.key]}}</span>
+    </div>
+</div>

@@ -1,0 +1,12 @@
+<div>
+    <app-form [routeUrl]="routeUrl" (addEvent)="onAddEvent($event)" (redirectEvent)="redirect()"></app-form>
+</div>
+<div>
+    <app-table [personsData]="personsData"
+               [routeUrl]="routeUrl"
+               (deleteEvent)="onDeleteEvent($event)"
+               [columns]="columns"
+               (toggleEvent)="onToggleEvent()"
+               [deleteOption]="deleteOption">
+    </app-table>
+</div>
